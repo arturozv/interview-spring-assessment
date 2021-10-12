@@ -16,10 +16,10 @@ import com.interview.assessment.player.PlayerServiceImpl;
 import com.interview.assessment.player.Role;
 
 @Configuration
-public class AssesmentConfiguration {
+public class AssessmentConfiguration {
 
 	@Bean
-	public PartyService partyService() {
+	public PartyService partyService(PlayerService playerService) {
 		var party1 = new Party(Arrays.asList(
 				new Player("Ana", Role.TANK),
 				new Player("Cris", Role.HEALER),
@@ -41,7 +41,7 @@ public class AssesmentConfiguration {
 				party2.getId(), party2
 		);
 
-		return new PartyServiceImpl(parties);
+		return new PartyServiceImpl(parties, playerService);
 	}
 
 	@Bean

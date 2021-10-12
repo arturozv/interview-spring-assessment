@@ -5,11 +5,13 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+import com.interview.assessment.external.AgifyClient;
 import com.interview.assessment.player.Player;
+import com.interview.assessment.player.PlayerServiceImpl;
 import com.interview.assessment.player.Role;
 import static org.assertj.core.api.Assertions.assertThat;
 
-// TODO: implement unit tests for PartyService
+// TODO: implement unit tests for PartyService to cover the functionality
 public class PartyServiceTest {
 
 	@Test
@@ -22,6 +24,9 @@ public class PartyServiceTest {
 	}
 
 	private PartyService getPartyService() {
+		// TODO: mock agify api
+		var playerService = new PlayerServiceImpl(new AgifyClient());
+
 		var party1 = new Party(Arrays.asList(
 				new Player("Ana", Role.TANK),
 				new Player("Cris", Role.HEALER),
@@ -43,6 +48,6 @@ public class PartyServiceTest {
 				party2.getId(), party2
 		);
 
-		return new PartyServiceImpl(parties);
+		return new PartyServiceImpl(parties, playerService);
 	}
 }

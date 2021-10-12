@@ -12,7 +12,8 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Override
 	public Integer getAge(String name) {
-		return agifyClient.getAge(name);
+		var agifyResponse = agifyClient.getAge(name);
+		return agifyResponse.getAge();
 	}
 
 }

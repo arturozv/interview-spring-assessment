@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.interview.assessment.player.Player;
 import com.interview.assessment.player.PlayerService;
 
@@ -14,12 +16,14 @@ public class PartyServiceImpl implements PartyService {
 	private final Map<Integer, Party> cache = new HashMap<>();
 	private Map<Integer, Party> store = new HashMap<>();
 
+	@Autowired
 	public PartyServiceImpl(PlayerService playerService) {
 		this.playerService = playerService;
 	}
 
-	public PartyServiceImpl(Map<Integer, Party> store) {
+	public PartyServiceImpl(Map<Integer, Party> store, PlayerService playerService) {
 		this.store = store;
+		this.playerService = playerService;
 	}
 
 	@Override
@@ -27,7 +31,9 @@ public class PartyServiceImpl implements PartyService {
 		var party = cache.get(id);
 		if (party == null) {
 			party = store.get(id);
-			// TODO: get ages for all party members using PlayerService
+			for (var player: party.getPlayers()) {
+				player.setAge(playerService.getAge(player.getName()));
+			}
 			cache.put(party.getId(), party);
 		}
 		return party;
@@ -57,7 +63,11 @@ public class PartyServiceImpl implements PartyService {
 	@Override
 	public List<Party> getParties() {
 		var parties = new ArrayList<>(store.values());
-		// TODO: get ages for all party members using PlayerService
+		for (var party: parties) {
+			for (var player : party.getPlayers()) {
+				player.setAge(playerService.getAge(player.getName()));
+			}
+		}
 		return parties;
 	}
 }
