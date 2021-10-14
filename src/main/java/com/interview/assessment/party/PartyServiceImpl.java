@@ -12,7 +12,7 @@ import com.interview.assessment.player.PlayerService;
 
 
 public class PartyServiceImpl implements PartyService {
-	private PlayerService playerService;
+	private final PlayerService playerService;
 	private final Map<Integer, Party> cache = new HashMap<>();
 	private Map<Integer, Party> store = new HashMap<>();
 
@@ -31,7 +31,7 @@ public class PartyServiceImpl implements PartyService {
 		var party = cache.get(id);
 		if (party == null) {
 			party = store.get(id);
-			for (var player: party.getPlayers()) {
+			for (var player : party.getPlayers()) {
 				player.setAge(playerService.getAge(player.getName()));
 			}
 			cache.put(party.getId(), party);
@@ -63,7 +63,7 @@ public class PartyServiceImpl implements PartyService {
 	@Override
 	public List<Party> getParties() {
 		var parties = new ArrayList<>(store.values());
-		for (var party: parties) {
+		for (var party : parties) {
 			for (var player : party.getPlayers()) {
 				player.setAge(playerService.getAge(player.getName()));
 			}

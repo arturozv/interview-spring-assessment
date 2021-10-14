@@ -9,13 +9,14 @@ import com.interview.assessment.external.AgifyClient;
 import com.interview.assessment.player.Player;
 import com.interview.assessment.player.PlayerServiceImpl;
 import com.interview.assessment.player.Role;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-// TODO: implement unit tests for PartyService to cover the functionality
+
 public class PartyServiceTest {
 
 	@Test
-	public void test_getParty(){
+	public void test_getParty() {
 		var partyService = getPartyService();
 		var party = partyService.getParty(1);
 		assertThat(party).isNotNull();
@@ -23,9 +24,14 @@ public class PartyServiceTest {
 		// TODO: add extra assertions
 	}
 
+	// TODO: implement unit tests for PartyService to cover the functionality
+
+
 	private PartyService getPartyService() {
 		// TODO: mock agify api
-		var playerService = new PlayerServiceImpl(new AgifyClient());
+		var agifyClient = new AgifyClient();
+
+		var playerService = new PlayerServiceImpl(agifyClient);
 
 		var party1 = new Party(Arrays.asList(
 				new Player("Ana", Role.TANK),

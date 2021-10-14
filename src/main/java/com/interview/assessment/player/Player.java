@@ -8,7 +8,6 @@ public class Player {
 	public Player(String name, Role role) {
 		this.name = name;
 		this.role = role;
-		this.age = age;
 	}
 
 	public Integer getAge() {

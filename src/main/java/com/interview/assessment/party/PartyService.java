@@ -10,8 +10,12 @@ import com.interview.assessment.player.Player;
 public interface PartyService {
 
 	Party getParty(int id);
+
 	List<Party> getParties();
+
 	void updateParty(Party party);
+
 	void addPlayerToParty(int partyId, Player player);
+
 	void removePlayerFromParty(int partyId, String playerName);
 }

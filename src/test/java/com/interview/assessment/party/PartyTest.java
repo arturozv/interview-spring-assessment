@@ -35,7 +35,7 @@ public class PartyTest {
 	@Test
 	public void test_getParty() throws Exception {
 		final var partyId = 1;
-		final var url = getUrl("/party/"+partyId);
+		final var url = getUrl("/party/" + partyId);
 		ResponseEntity<Party> responseEntity = restTemplate.getForEntity(url, Party.class);
 		Party party = responseEntity.getBody();
 

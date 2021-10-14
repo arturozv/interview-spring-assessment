@@ -29,7 +29,7 @@ public class AssessmentConfiguration {
 		));
 
 		var party2 = new Party(Arrays.asList(
-				new Player("Beatrice", Role.DPS),
+				new Player("Beatrice", Role.TANK),
 				new Player("James", Role.HEALER),
 				new Player("Henry", Role.DPS),
 				new Player("Alice", Role.DPS),
